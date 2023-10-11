@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:petro_audit/utils/utils.dart';
+import 'package:petro_audit/urls/urls.dart';
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController? userNameCont = TextEditingController();
@@ -18,7 +18,7 @@ class LoginProvider extends ChangeNotifier {
     const storage = FlutterSecureStorage();
     isLoading = true;
     notifyListeners();
-    var url = Uri.parse(Utils.petroApi + Utils.validateApi);
+    var url = Uri.parse(Urls.petroApi + Urls.validateApi);
     log(url.toString());
 
     final bodyMsg = jsonEncode({

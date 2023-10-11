@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:petro_audit/screens/audit/audit_screen.dart';
 import 'package:petro_audit/screens/home/home_screen.dart';
 import 'package:petro_audit/screens/profile/profile_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/graph_provider.dart';
 
 class ScreenMain extends StatelessWidget {
   ScreenMain({super.key, required this.uid, required this.token});
@@ -21,11 +24,15 @@ class ScreenMain extends StatelessWidget {
         valueListenable: screenNotifier,
         builder: (context, value, child) {
           return Scaffold(
-            body: screens[value],
+            body: SafeArea(child: screens[value]),
             bottomNavigationBar: BottomNavigationBar(
                 currentIndex: value,
                 onTap: (value) {
                   screenNotifier.value = value;
+                  if (value == 1) {
+                    Provider.of<GraphProvider>(context, listen: false)
+                        .getGraphDatas();
+                  }
                 },
                 items: const [
                   BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'hi'),

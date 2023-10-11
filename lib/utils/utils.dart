@@ -1,8 +1,31 @@
+import 'dart:developer';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+
 class Utils {
-  static String petroApi = 'https://www.petroinfotech.com/PetroHSE/api/';
-  static String validateApi = 'Admin/ValidateLogin';
-  static String homeApi = 'Dashboard/GetHomePage?companyCode=1&userId=610';
-  static String barGraphApi =
-      'Audit/GetDashboardAuditList?UserCompanyCode=1&loggedInUserID=610';
-  static String auditListApi = 'Audit/GetAuditList?mode=ALL&status=ALL';
+  static Future<http.Response> apiCall(String api) async {
+    const storage = FlutterSecureStorage();
+    String? uid = await storage.read(key: 'uid');
+    String? token = await storage.read(key: 'userToken');
+    // isLoading = true;
+    // notifyListeners();
+    var url = Uri.parse(api);
+    log(url.toString());
+
+    // final Map<String, String> headerMsg = jsonEncode({});
+
+    var response = await http.get(url, headers: {
+      "Authorization": "Bearer" + token!,
+      "CompanyCode": '1',
+      "UserId": uid!,
+      "appType": "MOB",
+      "content-type": "application/json",
+      "accept": "application/json",
+    });
+
+    // log(response.statusCode.toString());
+    // log(response.body);
+    return response;
+  }
 }

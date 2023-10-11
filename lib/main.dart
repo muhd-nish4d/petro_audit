@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petro_audit/provider/graph_provider.dart';
 import 'package:petro_audit/provider/home_provider.dart';
 import 'package:petro_audit/provider/login_provider.dart';
 import 'package:petro_audit/screens/login/login.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => GraphProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
