@@ -16,7 +16,7 @@ class Utils {
     // final Map<String, String> headerMsg = jsonEncode({});
 
     var response = await http.get(url, headers: {
-      "Authorization": "Bearer" + token!,
+      "Authorization": "Bearer${token!}",
       "CompanyCode": '1',
       "UserId": uid!,
       "appType": "MOB",

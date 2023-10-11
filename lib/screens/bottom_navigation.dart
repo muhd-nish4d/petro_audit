@@ -13,7 +13,7 @@ class ScreenMain extends StatelessWidget {
   final String token;
 
   ValueNotifier<int> screenNotifier = ValueNotifier(0);
-  final screens = [HomeScreen(), const ScreenAudit(), const ScreenProfile()];
+  final screens = const [HomeScreen(), ScreenAudit(), ScreenProfile()];
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(

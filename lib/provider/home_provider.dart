@@ -13,6 +13,8 @@ class HomeProvider extends ChangeNotifier {
   HomeDatasModel? homeData;
 
   void getHomeDatas() async {
+    isLoading = true;
+    notifyListeners();
     final response = await Utils.apiCall(Urls.petroApi + Urls.homeApi);
 
     if (response.statusCode == 200) {

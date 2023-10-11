@@ -265,21 +265,21 @@ class DtImage {
 class DtLagg {
   String dateVal;
   dynamic sortOrder;
-  dynamic? anm;
-  dynamic? fac;
-  dynamic? fat;
-  dynamic? lti;
-  dynamic? ltif;
-  dynamic? ltift;
-  dynamic? mtc;
-  dynamic? nmi;
-  dynamic? rta;
-  dynamic? rtaf;
-  dynamic? rwc;
-  dynamic? rwdc;
-  dynamic? trcf;
-  dynamic? trir;
-  dynamic? trirt;
+  dynamic anm;
+  dynamic fac;
+  dynamic fat;
+  dynamic lti;
+  dynamic ltif;
+  dynamic ltift;
+  dynamic mtc;
+  dynamic nmi;
+  dynamic rta;
+  dynamic rtaf;
+  dynamic rwc;
+  dynamic rwdc;
+  dynamic trcf;
+  dynamic trir;
+  dynamic trirt;
   dynamic tt;
   dynamic tot;
 
@@ -353,8 +353,8 @@ class DtLagg {
 class DtLead {
   String dateVal;
   dynamic sortOrder;
-  dynamic? tri;
-  dynamic? tot;
+  dynamic tri;
+  dynamic tot;
 
   DtLead({
     required this.dateVal,
@@ -385,7 +385,7 @@ class Dt {
   dynamic ltif;
   dynamic trcfTarget;
   dynamic trcf;
-  dynamic? ltifUnit;
+  dynamic ltifUnit;
 
   Dt({
     required this.statisticMonth,

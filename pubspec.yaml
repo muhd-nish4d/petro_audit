@@ -39,6 +39,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   http: ^1.1.0
   fl_chart: ^0.64.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

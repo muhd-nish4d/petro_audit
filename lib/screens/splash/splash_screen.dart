@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -18,24 +19,27 @@ class ScreenSplash extends StatefulWidget {
 class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 3), () async {
       const storage = FlutterSecureStorage();
       String? uid = await storage.read(key: 'uid');
-      String? token = await storage.read(key: 'userToken');
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          if (token != null) {
-            Provider.of<HomeProvider>(context, listen: false).getHomeDatas();
-            return ScreenMain(
-              uid: uid!,
-              token: token,
-            );
-          } else {
-            return ScreenLogin();
-          }
-        },
-      ));
+      storage.read(key: 'userToken').then((value) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) {
+            if (value != null) {
+              log(value);
+              Provider.of<HomeProvider>(context, listen: false).getHomeDatas();
+              return ScreenMain(
+                uid: uid!,
+                token: value,
+              );
+            } else {
+              return ScreenLogin();
+            }
+          },
+        ));
+      });
     });
+
     super.initState();
   }
 

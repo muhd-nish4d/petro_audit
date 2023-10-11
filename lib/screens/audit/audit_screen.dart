@@ -1,13 +1,8 @@
-import 'dart:developer';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:petro_audit/provider/audit_provider.dart';
 import 'package:petro_audit/screens/audit/widgets/bottum_audit_section.dart';
 import 'package:petro_audit/screens/audit/widgets/top_graph_section.dart';
-import 'package:provider/provider.dart';
 
-import '../../provider/graph_provider.dart';
 
 class ScreenAudit extends StatelessWidget {
   const ScreenAudit({super.key});
