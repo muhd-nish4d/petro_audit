@@ -27,10 +27,9 @@ class _ScreenSplashState extends State<ScreenSplash> {
           builder: (context) {
             if (value != null) {
               log(value);
-              Provider.of<HomeProvider>(context, listen: false).getHomeDatas();
+              // Provider.of<HomeProvider>(context, listen: false)
+              //     .getHomeDatas(context);
               return ScreenMain(
-                uid: uid!,
-                token: value,
               );
             } else {
               return ScreenLogin();

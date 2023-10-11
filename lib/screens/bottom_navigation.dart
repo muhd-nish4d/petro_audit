@@ -6,11 +6,10 @@ import 'package:petro_audit/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/graph_provider.dart';
+import '../provider/home_provider.dart';
 
 class ScreenMain extends StatelessWidget {
-  ScreenMain({super.key, required this.uid, required this.token});
-  final String uid;
-  final String token;
+  ScreenMain({super.key});
 
   ValueNotifier<int> screenNotifier = ValueNotifier(0);
   final screens = const [HomeScreen(), ScreenAudit(), ScreenProfile()];
@@ -25,12 +24,26 @@ class ScreenMain extends StatelessWidget {
                 currentIndex: value,
                 onTap: (value) {
                   screenNotifier.value = value;
-                  if (value == 1) {
-                    Provider.of<GraphProvider>(context, listen: false)
-                        .getGraphDatas();
-                    Provider.of<AuditProvider>(context, listen: false)
-                        .getAuditDetails();
+
+                  switch (value) {
+                    case 0:
+                      
+                      break;
+                    case 1:
+                      Provider.of<GraphProvider>(context, listen: false)
+                          .getGraphDatas(context);
+                      Provider.of<AuditProvider>(context, listen: false)
+                          .getAuditDetails(context);
+                      break;
+                    default:
                   }
+
+                  // if (value == 1) {
+                  //   Provider.of<GraphProvider>(context, listen: false)
+                  //       .getGraphDatas(context);
+                  //   Provider.of<AuditProvider>(context, listen: false)
+                  //       .getAuditDetails(context);
+                  // }
                 },
                 items: const [
                   BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'hi'),

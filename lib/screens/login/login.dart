@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petro_audit/models/status_enum.dart';
 import 'package:petro_audit/provider/login_provider.dart';
 import 'package:petro_audit/screens/bottom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -15,19 +16,18 @@ class ScreenLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 1, 0, 34),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: SingleChildScrollView(
-              child: Consumer<LoginProvider>(
-                builder: (context, value, child) => Column(
+              child: Consumer<LoginProvider>(builder: (context, value, child) {
+                return Column(
                   children: [
                     const Text(
                       'Login',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
@@ -41,29 +41,35 @@ class ScreenLogin extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          value.submintUsernamePassword();
-                          if (value.isSuccess) {
-                            Provider.of<HomeProvider>(context, listen: false)
-                                .getHomeDatas();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ScreenMain(
-                                          token: value.token!,
-                                          uid: value.uid!,
-                                        )));
-                          }
+                        onPressed: () async {
+                          value.submintUsernamePassword().then((data) {
+                            if (value.status == CallStatus.success) {
+                              // Provider.of<HomeProvider>(context, listen: false)
+                              //     .getHomeDatas(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ScreenMain( )));
+                            } else if (value.status == CallStatus.failed) {
+                              final snackBar = SnackBar(
+                                content: Text(value.errorMassege!),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        child: Text(value.isLoading ? 'Loading...' : 'Login'),
+                        child: Text(value.status == CallStatus.waiting
+                            ? 'Loading...'
+                            : 'Login'),
                       ),
                     )
                   ],
-                ),
-              ),
+                );
+              }),
             ),
           ),
         ),

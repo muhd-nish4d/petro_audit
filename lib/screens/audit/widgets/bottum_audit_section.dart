@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petro_audit/models/status_enum.dart';
 import 'package:petro_audit/provider/audit_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +11,7 @@ class BottumSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuditProvider>(builder: (context, value, child) {
-      return !value.isLoading
+      return value.status == CallStatus.success
           ? ListView.builder(
               padding: const EdgeInsets.all(10),
               itemBuilder: (context, index) {
@@ -51,9 +52,13 @@ class BottumSection extends StatelessWidget {
               },
               itemCount: value.auditData!.length,
             )
-          : const Center(
-              child: CircularProgressIndicator(),
-            );
+          : value.status == CallStatus.waiting
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : const Center(
+                  child: Icon(Icons.wifi_find_rounded),
+                );
     });
   }
 }

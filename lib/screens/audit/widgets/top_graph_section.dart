@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:petro_audit/models/status_enum.dart';
 import 'package:petro_audit/provider/graph_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class TopSection extends StatelessWidget {
       width: double.infinity,
       height: screenSize.height * .4,
       child: Consumer<GraphProvider>(builder: (context, value, child) {
-        if (!value.isLoading) {
+        if (value.status == CallStatus.success) {
           return Column(
             children: [
               SizedBox(
@@ -72,8 +73,10 @@ class TopSection extends StatelessWidget {
               )
             ],
           );
-        } else {
+        } else if (value.status == CallStatus.waiting) {
           return const Center(child: CircularProgressIndicator());
+        } else {
+          return const Center(child: Text('Filed to show'));
         }
       }),
     );
