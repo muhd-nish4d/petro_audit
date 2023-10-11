@@ -2,13 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:petro_audit/provider/home_provider.dart';
-import 'package:petro_audit/urls/urls.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.hi});
-  final String hi;
+  const HomeScreen({super.key});
+  // final String hi;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             TextButton(
                 onPressed: () async {
-                  Provider.of<HomeProvider>(context).getHomeDatas();
+                  // Provider.of<HomeProvider>(context).getHomeDatas();
                 },
                 child: Text('hi')),
             TextButton(

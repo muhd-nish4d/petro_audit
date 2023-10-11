@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petro_audit/provider/audit_provider.dart';
 import 'package:petro_audit/screens/audit/audit_screen.dart';
 import 'package:petro_audit/screens/home/home_screen.dart';
 import 'package:petro_audit/screens/profile/profile_screen.dart';
@@ -12,14 +13,9 @@ class ScreenMain extends StatelessWidget {
   final String token;
 
   ValueNotifier<int> screenNotifier = ValueNotifier(0);
-
+  final screens = [HomeScreen(), const ScreenAudit(), const ScreenProfile()];
   @override
   Widget build(BuildContext context) {
-    final screens = [
-      HomeScreen(hi: token),
-      const ScreenAudit(),
-      const ScreenProfile()
-    ];
     return ValueListenableBuilder(
         valueListenable: screenNotifier,
         builder: (context, value, child) {
@@ -32,6 +28,8 @@ class ScreenMain extends StatelessWidget {
                   if (value == 1) {
                     Provider.of<GraphProvider>(context, listen: false)
                         .getGraphDatas();
+                    Provider.of<AuditProvider>(context, listen: false)
+                        .getAuditDetails();
                   }
                 },
                 items: const [
