@@ -3,6 +3,7 @@ import 'package:petro_audit/provider/login_provider.dart';
 import 'package:petro_audit/screens/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/home_provider.dart';
 import 'widget/text_field.dart';
 
 class ScreenLogin extends StatelessWidget {
@@ -43,6 +44,8 @@ class ScreenLogin extends StatelessWidget {
                         onPressed: () {
                           value.submintUsernamePassword();
                           if (value.isSuccess) {
+                            Provider.of<HomeProvider>(context, listen: false)
+                                .getHomeDatas();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

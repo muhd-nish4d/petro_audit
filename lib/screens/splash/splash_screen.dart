@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petro_audit/screens/bottom_navigation.dart';
 import 'package:petro_audit/screens/login/login.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/home_provider.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -22,6 +25,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
           if (token != null) {
+            Provider.of<HomeProvider>(context, listen: false).getHomeDatas();
             return ScreenMain(
               uid: uid!,
               token: token,

@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/home_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,28 +12,57 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const storage = FlutterSecureStorage();
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.amber,
       child: SafeArea(
-        child: Column(
-          children: [
-            TextButton(
-                onPressed: () async {
-                  // Provider.of<HomeProvider>(context).getHomeDatas();
+        child: Consumer<HomeProvider>(
+          builder: (context, value, child) => Column(
+            children: [
+              Expanded(
+                  child: GridView.builder(
+                padding: const EdgeInsets.all(4),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1.5,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 2,
+                    mainAxisSpacing: 0),
+                itemBuilder: (context, index) {
+                  final data = value.homeData?.dtAbstract[index];
+                  return Card(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(data?.item ?? ''),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Color(int.parse(
+                                    '0xFF${data?.colour.substring(1, 7).toUpperCase()}')),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                data?.count.toString() ?? '',
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
                 },
-                child: Text('hi')),
-            TextButton(
-                onPressed: () async {
-                  String? value = await storage.read(key: 'uid');
-                  String? a = await storage.read(key: 'userToken');
-
-                  log('$value     -    $a');
-                },
-                child: Text('hello')),
-          ],
+                itemCount: value.homeData?.dtAbstract.length ?? 0,
+              ))
+            ],
+          ),
         ),
       ),
     );
