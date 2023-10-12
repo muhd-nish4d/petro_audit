@@ -1,12 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petro_audit/provider/audit_provider.dart';
-import 'package:petro_audit/screens/audit/audit_screen.dart';
-import 'package:petro_audit/screens/home/home_screen.dart';
-import 'package:petro_audit/screens/profile/profile_screen.dart';
+import 'package:petro_audit/presentation/audit/audit_screen.dart';
+import 'package:petro_audit/presentation/home/home_screen.dart';
+import 'package:petro_audit/presentation/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/graph_provider.dart';
-import '../provider/home_provider.dart';
 
 class ScreenMain extends StatelessWidget {
   ScreenMain({super.key});
@@ -27,7 +27,6 @@ class ScreenMain extends StatelessWidget {
 
                   switch (value) {
                     case 0:
-                      
                       break;
                     case 1:
                       Provider.of<GraphProvider>(context, listen: false)
@@ -46,10 +45,13 @@ class ScreenMain extends StatelessWidget {
                   // }
                 },
                 items: const [
-                  BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'hi'),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.abc), label: 'hello'),
-                  BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'hii')
+                      icon: Icon(CupertinoIcons.home), label: 'Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.insights_rounded), label: 'Audit'),
+                  BottomNavigationBarItem(
+                      icon: Icon(CupertinoIcons.person_alt_circle_fill),
+                      label: 'Profile')
                 ]),
           );
         });

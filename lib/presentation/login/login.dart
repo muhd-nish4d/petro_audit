@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petro_audit/models/status_enum.dart';
 import 'package:petro_audit/provider/login_provider.dart';
-import 'package:petro_audit/screens/bottom_navigation.dart';
+import 'package:petro_audit/presentation/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/home_provider.dart';
 import 'widget/text_field.dart';
 
 class ScreenLogin extends StatelessWidget {
@@ -44,12 +43,10 @@ class ScreenLogin extends StatelessWidget {
                         onPressed: () async {
                           value.submintUsernamePassword().then((data) {
                             if (value.status == CallStatus.success) {
-                              // Provider.of<HomeProvider>(context, listen: false)
-                              //     .getHomeDatas(context);
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ScreenMain( )));
+                                      builder: (context) => ScreenMain()));
                             } else if (value.status == CallStatus.failed) {
                               final snackBar = SnackBar(
                                 content: Text(value.errorMassege!),

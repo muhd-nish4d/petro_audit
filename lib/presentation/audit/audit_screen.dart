@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:petro_audit/screens/audit/widgets/bottum_audit_section.dart';
-import 'package:petro_audit/screens/audit/widgets/top_graph_section.dart';
+import 'package:petro_audit/presentation/audit/widgets/bottum_audit_section.dart';
+import 'package:petro_audit/presentation/audit/widgets/top_graph_section.dart';
 
 
 class ScreenAudit extends StatelessWidget {

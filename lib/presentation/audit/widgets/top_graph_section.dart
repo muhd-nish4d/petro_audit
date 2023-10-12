@@ -20,29 +20,27 @@ class TopSection extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: screenSize.height * .3,
-                child: Card(
-                  child: BarChart(
-                    BarChartData(
-                        maxY: 100,
-                        minY: 0,
-                        gridData: const FlGridData(show: false),
-                        borderData: FlBorderData(show: false),
-                        titlesData: const FlTitlesData(
-                            rightTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false))),
-                        barGroups: value.graphDatas!.map((e) {
-                          return BarChartGroupData(x: e.count, barRods: [
-                            BarChartRodData(
-                                toY: e.count.toDouble(),
-                                color: Color(int.parse(
-                                    '0xFF${e.colour.substring(1, 7).toUpperCase()}')),
-                                width: 30,
-                                borderRadius: BorderRadius.zero)
-                          ]);
-                        }).toList()),
-                  ),
+                child: BarChart(
+                  BarChartData(
+                      maxY: 100,
+                      minY: 0,
+                      gridData: const FlGridData(show: false),
+                      borderData: FlBorderData(show: false),
+                      titlesData: const FlTitlesData(
+                          rightTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false))),
+                      barGroups: value.graphDatas!.map((e) {
+                        return BarChartGroupData(x: e.count, barRods: [
+                          BarChartRodData(
+                              toY: e.count.toDouble(),
+                              color: Color(int.parse(
+                                  '0xFF${e.colour.substring(1, 7).toUpperCase()}')),
+                              width: 30,
+                              borderRadius: BorderRadius.zero)
+                        ]);
+                      }).toList()),
                 ),
               ),
               Expanded(
@@ -56,8 +54,6 @@ class TopSection extends StatelessWidget {
                       child: Row(
                         children: [
                           Card(
-                            // width: 30,
-                            // height: 35,
                             color: Color(int.parse(
                                 '0xFF${datas.colour.substring(1, 7).toUpperCase()}')),
                             child: iconSelector(datas.icon),

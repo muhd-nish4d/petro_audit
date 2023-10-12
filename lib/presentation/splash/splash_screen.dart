@@ -1,13 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:petro_audit/screens/bottom_navigation.dart';
-import 'package:petro_audit/screens/login/login.dart';
-import 'package:provider/provider.dart';
-
-import '../../provider/home_provider.dart';
+import 'package:petro_audit/presentation/bottom_navigation.dart';
+import 'package:petro_audit/presentation/login/login.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -21,16 +16,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
   void initState() {
     Timer(const Duration(seconds: 3), () async {
       const storage = FlutterSecureStorage();
-      String? uid = await storage.read(key: 'uid');
       storage.read(key: 'userToken').then((value) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) {
             if (value != null) {
-              log(value);
-              // Provider.of<HomeProvider>(context, listen: false)
-              //     .getHomeDatas(context);
-              return ScreenMain(
-              );
+              return ScreenMain();
             } else {
               return ScreenLogin();
             }
@@ -46,7 +36,13 @@ class _ScreenSplashState extends State<ScreenSplash> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Splash'),
+        child: Text(
+          'Petro',
+          style: TextStyle(
+              color: Color.fromARGB(255, 0, 38, 104),
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
